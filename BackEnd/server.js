@@ -46,6 +46,13 @@ const bookSchema = new mongoose.Schema({
 
 const bookModel = mongoose.model('books', bookSchema);
 
+app.delete('/api/book/:id', async (req,res)=>{
+  console.log("Delete: "+req.params.id);
+
+  let book = await bookModel.findByIdAndDelete (req.params.id);
+  res.send(book);
+})
+
 
 
 {/*Changed the React app so that it now makes a post request to the server (sending a
@@ -71,7 +78,7 @@ app.post('/api/books', (req,res) =>{
     )
 
 
-    res.send("Book Created")
+   
 })
 
 app.get('/', (req, res) => {
